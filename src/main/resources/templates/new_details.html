@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Create New Details</title>
+</head>
+<body>
+<div align="center">
+    <h1>Create New Details</h1>
+    <a href="/">Go Back</a>
+    <br />
+    <form action="#" th:action="@{/saveDetails}" th:object="${details}"
+          method="post">
+
+        <table border="0" cellpadding="10">
+            <tr>
+                <td>Customer ID:</td>
+                <td>
+                    <input type="text" th:field="*{customer}" readonly="readonly" />
+                </td>
+            </tr>
+            <tr>
+                <td>in:</td>
+                <td><input type="text" th:field="*{received}" /></td>
+            </tr>
+            <tr>
+                <td>name:</td>
+                <td><input type="text" th:field="*{manufacturer}" /></td>
+            </tr>
+            <tr>
+                <td>model:</td>
+                <td><input type="text" th:field="*{manufacturerPattern}" /></td>
+            </tr>
+            <tr>
+                <td>serial number:</td>
+                <td><input type="text" th:field="*{patternNumber}" /></td>
+            </tr>
+            <tr>
+                <td>symptoms:</td>
+                <td><input type="text" th:field="*{symptoms}" /></td>
+            </tr>
+            <tr>
+                <td>repair:</td>
+                <td><input type="text" th:field="*{repair}" /></td>
+            </tr>
+            <tr>
+                <td>power supply:</td>
+                <td><input type="text" th:field="*{powerSupply}" /></td>
+            </tr>
+            <tr>
+                <td>battery:</td>
+                <td><input type="text" th:field="*{battery}" /></td>
+            </tr>
+            <tr>
+                <td>comments:</td>
+                <td><input type="text" th:field="*{comments}" /></td>
+            </tr>
+            <tr>
+                <td>inner:</td>
+                <td><input type="text" th:field="*{documentInternal}" /></td>
+            </tr>
+            <tr>
+                <td>outer:</td>
+                <td><input type="text" th:field="*{documentExternal}" /></td>
+            </tr>
+            <tr>
+                <td>warranty:</td>
+                <td><input type="text" th:field="*{documentWarranty}" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit">Save</button> </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

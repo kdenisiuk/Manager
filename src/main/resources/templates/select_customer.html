@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Result</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/table.css}" />
+</head>
+<body>
+<div align="center">
+    <h1>Customer & History</h1>
+    <a th:href="@{'/newdetail/' + ${customerSelect.customer_id}}">New Detail</a>
+    <a href="/find">Find Exsisiting Customer</a>
+    <a href="/">Go Back</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Owner</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customers : ${customerSelect}">
+            <td th:text="${customerSelect.getCustomer_id()}">Customer ID</td>
+            <td th:text="${customerSelect.getOwner()}">Owner</td>
+            <td th:text="${customerSelect.getAddress()}">Address</td>
+            <td th:text="${customerSelect.getPhoneNumber()}">Phone Number</td>
+            <td>
+                <a th:href="@{'/edit/' + ${customerSelect.customer_id}}">Edit</a>
+                <a th:href="@{'/delete/' + ${customerSelect.customer_id}}">Delete</a>
+                <a th:href="@{'/edit/' + ${customerSelect.customer_id}}">Edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<br>
+
+<div align="center">
+    <h1>History</h1>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Delivered</th>
+            <th>Received</th>
+            <th>Returned</th>
+            <th>Manufacturer</th>
+            <th>Manufacturer Pattern</th>
+            <th>Pattern Number</th>
+            <th>Symptoms</th>
+            <th>Repair</th>
+            <th>Power Supply</th>
+            <th>Battery</th>
+            <th>Comments</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="details : ${detailsSelect}">
+            <td th:text="${details.delivered}">Delivered</td>
+            <td th:text="${details.received}">Received</td>
+            <td th:text="${details.returned}">Returned</td>
+            <td th:text="${details.manufacturer}">Manufacturer</td>
+            <td th:text="${details.manufacturerPattern}">Manufacturer Pattern</td>
+            <td th:text="${details.patternNumber}">Pattern Number</td>
+            <td th:text="${details.symptoms}">Symptoms</td>
+            <td th:text="${details.repair}">Repair</td>
+            <td th:text="${details.powerSupply}">Power Supply</td>
+            <td th:text="${details.battery}">Battery</td>
+            <td th:text="${details.comments}">Comments</td>
+            <td>
+                <a th:href="@{'/deletedetail/' + ${details.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
