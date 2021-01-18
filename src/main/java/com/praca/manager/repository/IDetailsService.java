@@ -1,4 +1,6 @@
-package com.praca.manager.customer;
+package com.praca.manager.repository;
+
+import com.praca.manager.entity.Details;
 
 import java.util.List;
 

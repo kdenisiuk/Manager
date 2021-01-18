@@ -1,5 +1,6 @@
-package com.praca.manager.customer;
+package com.praca.manager.repository;
 
+import com.praca.manager.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

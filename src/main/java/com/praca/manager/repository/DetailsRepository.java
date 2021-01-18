@@ -1,5 +1,6 @@
-package com.praca.manager.customer;
+package com.praca.manager.repository;
 
+import com.praca.manager.entity.Details;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,5 +13,4 @@ public interface DetailsRepository extends JpaRepository<Details, Integer> {
 
     @Query("from Details where customer.customer_id = :customerId")
     List<Details> findByCustomerId(@Param("customerId") Integer id);
-
 }

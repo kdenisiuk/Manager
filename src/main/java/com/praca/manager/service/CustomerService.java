@@ -1,5 +1,8 @@
-package com.praca.manager.customer;
+package com.praca.manager.service;
 
+import com.praca.manager.repository.CustomerRepository;
+import com.praca.manager.repository.ICustomerService;
+import com.praca.manager.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +17,7 @@ public class CustomerService implements ICustomerService {
     private CustomerRepository customerRepository;
 
     public List<Customer> listAll() {
+
         return customerRepository.findAll();
     }
 
@@ -22,11 +26,8 @@ public class CustomerService implements ICustomerService {
     }
 
     public Customer getCustomer(Integer id) {
-        return customerRepository.findById(id).get();
-    }
 
-    public Customer getReferenceId(Integer id){
-        return customerRepository.getOne(id);
+        return customerRepository.findById(id).get();
     }
 
     public void delete(Integer id) {
@@ -36,6 +37,7 @@ public class CustomerService implements ICustomerService {
     @Override
     public List<Customer> findByPhoneNumberEqualsTo(String phoneNumber, String owner) {
         var customers = (List<Customer>) customerRepository.findByPhoneNumberEqualsTo(phoneNumber, owner);
+
         return customers;
     }
 }

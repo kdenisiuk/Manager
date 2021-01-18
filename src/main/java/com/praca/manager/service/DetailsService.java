@@ -1,5 +1,8 @@
-package com.praca.manager.customer;
+package com.praca.manager.service;
 
+import com.praca.manager.repository.DetailsRepository;
+import com.praca.manager.repository.IDetailsService;
+import com.praca.manager.entity.Details;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,16 +16,8 @@ public class DetailsService implements IDetailsService {
     @Autowired
     private DetailsRepository detailsRepository;
 
-    public List<Details> listAll(){
-        return detailsRepository.findAll();
-    }
-
     public void saveDetails(Details details){
         detailsRepository.save(details);
-    }
-
-    public Details getDetails(Integer id){
-        return detailsRepository.findById(id).get();
     }
 
     public void deleteDetails(Integer id){
@@ -32,6 +27,7 @@ public class DetailsService implements IDetailsService {
     @Override
     public List<Details> findByCustomerId(int id) {
         var customerDetails = (List<Details>) detailsRepository.findByCustomerId(id);
+
         return customerDetails;
     }
 }

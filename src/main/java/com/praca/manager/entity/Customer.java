@@ -1,4 +1,4 @@
-package com.praca.manager.customer;
+package com.praca.manager.entity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,41 +26,41 @@ public class Customer {
     public Customer(){
     }
 
-    public Customer(String owner, String address, String phoneNumber){
-        this.owner = owner;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
+    public Customer(String owner,
+                    String address,
+                    String phoneNumber){
+                        this.owner = owner;
+                        this.address = address;
+                        this.phoneNumber = phoneNumber;
     }
 
     public Integer getCustomer_id() {
+
         return customer_id;
     }
 
-    public void setCustomer_id(Integer id) {
-        this.customer_id = id;
-    }
-
     public String getOwner() {
+
         return owner;
     }
 
     public void setOwner(String firstName) {
+
         this.owner = firstName;
     }
 
     public String getAddress() {
+
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getPhoneNumber() {
+
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
+
         this.phoneNumber = phoneNumber;
     }
 
