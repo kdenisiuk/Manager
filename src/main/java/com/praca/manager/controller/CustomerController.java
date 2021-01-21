@@ -97,6 +97,7 @@ public class CustomerController {
 
     @RequestMapping("/deletedetail/{id}")
     public String deleteDetail(@PathVariable(name = "id") Integer id){
+
         detailsService.deleteDetails(id);
 
         return "redirect:/select/{id}";
@@ -104,6 +105,7 @@ public class CustomerController {
 
     @RequestMapping("/delete/{id}")
     public String deleteCustomer(@PathVariable(name = "id") Integer id) {
+
         customerService.delete(id);
 
         return "redirect:/";
@@ -125,8 +127,6 @@ public class CustomerController {
         model.addAttribute("customerPhoneNumber", customer);
 
         customer.setPhoneNumber(customer.getPhoneNumber());
-
-        System.out.println(customer.getPhoneNumber());
 
         return "find_customer";
     }

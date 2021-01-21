@@ -1,8 +1,8 @@
 package com.praca.manager.service;
 
+import com.praca.manager.entity.Details;
 import com.praca.manager.repository.DetailsRepository;
 import com.praca.manager.repository.IDetailsService;
-import com.praca.manager.entity.Details;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
