@@ -1,19 +1,25 @@
 package com.praca.manager.controller;
 
+import com.itextpdf.text.DocumentException;
 import com.praca.manager.entity.Customer;
 import com.praca.manager.entity.Details;
 import com.praca.manager.service.CustomerService;
 import com.praca.manager.service.DetailsService;
+import com.praca.manager.service.PdfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @Controller
 public class CustomerController {
+
+    @Autowired
+    private PdfService pdfService;
 
     @Autowired
     private CustomerService customerService;
@@ -22,11 +28,14 @@ public class CustomerController {
     private DetailsService detailsService;
 
     @RequestMapping("/")
-    public String viewHomePage(Model model) {
+    public String viewHomePage(Model model) throws FileNotFoundException, DocumentException {
 
         List<Customer> listCustomers = customerService.listAll();
 
         model.addAttribute("listCustomers", listCustomers);
+        System.out.println("i start");
+        pdfService.newDocument();
+        System.out.println("i finish");
 
         return "index";
     }
