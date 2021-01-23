@@ -23,15 +23,16 @@
         </thead>
         <tbody>
         <tr th:each="customer : ${listCustomers}">
-            <td th:text="${customer.customer_id}">Customer ID</td>
+            <td th:text="${customer.customerId}">Customer ID</td>
             <td th:text="${customer.owner}">First Name</td>
             <td th:text="${customer.address}">Address</td>
             <td th:text="${customer.phoneNumber}">Phone Number</td>
             <td>
-                <a class="edit" th:href="@{'/edit/' + ${customer.customer_id}}">Edit</a>
-                <a class="delete" th:href="@{'/delete/' + ${customer.customer_id}}">Delete</a>
-                <a class="select" th:href="@{'/select/' + ${customer.customer_id}}">Select</a>
-                <a class="new" th:href="@{'/newdetail/' + ${customer.customer_id}}">New Detail</a>
+                <a class="edit" th:href="@{'/edit/' + ${customer.customerId}}">Edit</a>
+                <a class="delete" th:href="@{'/delete/' + ${customer.customerId}}">Delete</a>
+                <a class="select" th:href="@{'/select/' + ${customer.customerId}}">Select</a>
+                <a class="new" th:href="@{'/newdetail/' + ${customer.customerId}}">New Detail</a>
+                <a th:href="@{'/print/' + ${customer.customerId}}">To PDF </a>
             </td>
         </tr>
         </tbody>

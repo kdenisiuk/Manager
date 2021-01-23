@@ -8,9 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface DetailsRepository extends JpaRepository<Details, Integer> {
 
-    @Query("from Details where customer.customer_id = :customerId")
+    @Query("from Details where customer.customerId = :customerId")
     List<Details> findByCustomerId(@Param("customerId") Integer id);
 }

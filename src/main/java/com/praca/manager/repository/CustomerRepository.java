@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     @Query("from Customer where (phoneNumber = :phoneNumber) or (owner = :owner)")

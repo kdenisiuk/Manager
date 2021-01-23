@@ -24,15 +24,15 @@
         </thead>
         <tbody>
         <tr th:each="customers : ${customerResult}">
-            <td th:text="${customers.getCustomer_id()}">Customer ID</td>
+            <td th:text="${customers.getCustomerId()}">Customer ID</td>
             <td th:text="${customers.getOwner()}">Owner</td>
             <td th:text="${customers.getAddress()}">Address</td>
             <td th:text="${customers.getPhoneNumber()}">Phone Number</td>
             <td>
-                <a th:href="@{'/edit/' + ${customers.customer_id}}">Edit</a>
-                <a th:href="@{'/delete/' + ${customers.customer_id}}">Delete</a>
-                <a th:href="@{'/newdetail/' + ${customers.customer_id}}">New Detail</a>
-                <a th:href="@{'/select/' + ${customers.customer_id}}">Select</a>
+                <a th:href="@{'/edit/' + ${customers.customerId}}">Edit</a>
+                <a th:href="@{'/delete/' + ${customers.customerId}}">Delete</a>
+                <a th:href="@{'/newdetail/' + ${customers.customerId}}">New Detail</a>
+                <a th:href="@{'/select/' + ${customers.customerId}}">Select</a>
             </td>
         </tr>
         </tbody>

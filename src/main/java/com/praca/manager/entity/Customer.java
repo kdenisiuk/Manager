@@ -9,7 +9,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer customer_id;
+    private Integer customerId;
 
     @Column(name = "owner")
     private String owner;
@@ -26,17 +26,24 @@ public class Customer {
     public Customer(){
     }
 
-    public Customer(String owner,
+    public Customer(Integer customerId,
+                    String owner,
                     String address,
                     String phoneNumber){
+                        this.customerId = customerId;
                         this.owner = owner;
                         this.address = address;
                         this.phoneNumber = phoneNumber;
     }
 
-    public Integer getCustomer_id() {
+    public Integer getCustomerId() {
 
-        return customer_id;
+        return customerId;
+    }
+
+    public void setCustomerId(Integer id){
+
+        this.customerId = customerId;
     }
 
     public String getOwner() {
@@ -72,7 +79,7 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + customer_id +
+                "id=" + customerId +
                 ", firstName='" + owner + '\'' +
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +

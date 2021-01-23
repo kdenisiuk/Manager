@@ -10,13 +10,13 @@
     <h1>Edit Customer</h1>
     <a href="/">Go Back</a>
     <br />
-    <form action="#" th:action="@{/save}" th:object="${customer}"
+    <form action="#" th:action="@{'/update/' + ${id}}" th:object="${customer}"
           method="post">
         <table border="0" cellpadding="10">
             <tr>
                 <td>Customer ID:</td>
                 <td>
-                    <input type="text" th:field="*{customer_id}" readonly="readonly" />
+                    <input type="text" th:field="*{customerId}" readonly="readonly" />
                 </td>
             </tr>
             <tr>

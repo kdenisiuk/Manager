@@ -8,7 +8,7 @@
 <body>
 <div align="center">
     <h1>Customer & History</h1>
-    <a th:href="@{'/newdetail/' + ${customerSelect.customer_id}}">New Detail</a>
+    <a th:href="@{'/newdetail/' + ${customerSelect.customerId}}">New Detail</a>
     <a href="/find">Find Exsisiting Customer</a>
     <a href="/">Go Back</a>
     <br/><br/>
@@ -24,14 +24,14 @@
         </thead>
         <tbody>
         <tr th:each="customers : ${customerSelect}">
-            <td th:text="${customerSelect.getCustomer_id()}">Customer ID</td>
+            <td th:text="${customerSelect.getCustomerId()}">Customer ID</td>
             <td th:text="${customerSelect.getOwner()}">Owner</td>
             <td th:text="${customerSelect.getAddress()}">Address</td>
             <td th:text="${customerSelect.getPhoneNumber()}">Phone Number</td>
             <td>
-                <a th:href="@{'/edit/' + ${customerSelect.customer_id}}">Edit</a>
-                <a th:href="@{'/delete/' + ${customerSelect.customer_id}}">Delete</a>
-                <a th:href="@{'/edit/' + ${customerSelect.customer_id}}">Edit</a>
+                <a th:href="@{'/edit/' + ${customerSelect.customerId}}">Edit</a>
+                <a th:href="@{'/delete/' + ${customerSelect.customerId}}">Delete</a>
+                <a th:href="@{'/edit/' + ${customerSelect.customerId}}">Edit</a>
             </td>
         </tr>
         </tbody>

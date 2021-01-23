@@ -10,16 +10,18 @@ phone_number int not null
 );
 
 insert into customer values
-(1, "Krzysztof Denisiuk", "street 1", 123456789),
-(2, "Denisiuk Krzysztof", "street 18", 111155555),
-(3, "John Smith", "street 40", 000000000);
+(1, "Krzysztof Denisiuk", "ulica 1", 123456789),
+(2, "Sebastian Gałecki", "stołowa 18", 123456789),
+(3, "John Smith", "street 40", 444555666),
+(4, "Jan Kowalski", "ulicowa 18", 777888999),
+(5, "John Wick", "pieskowa 10", 888999777) ;
 
 create table details(
 customer_id int,
 id int auto_increment primary key,
 delivered tinyint(1),
-received varchar(200),
-returned varchar(200),
+received date,
+returned date,
 manufacturer varchar(200),
 manufacturer_pattern varchar(200),
 pattern_number varchar(200),
@@ -34,3 +36,9 @@ document_warranty varchar(200),
 foreign key (customer_id) references customer(customer_id)
 );
 
+insert into details values
+(1, 1, true, "2021-01-10", "2021-01-15", "Asus", "x54hr", "0001", "zepsute", "naprawione", "zasilacz", true, "brak", "", "", ""),
+(1, 2, true, "2021-01-15", "2021-01-18", "HP", "ProBook", "G3", "zepsute", "naprawione", "zasilacz", true, "brak", "", "", ""),
+(1, 3, true, "2021-01-15", "2021-01-16", "Lenovo", "G20", "07", "zepsute", "naprawione", "zasilacz", true, "brak", "", "", ""),
+(1, 4, true, "2021-01-15", "2021-01-17", "Dell", "KM", "500", "zepsute", "naprawione", "zasilacz", true, "brak", "", "", ""),
+(2, 5, true, "2021-01-17", "2021-01-19", "Razer", "08", "100", "zepsute", "naprawione", "zasilacz", true, "brak", "", "", "");

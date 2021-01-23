@@ -3,7 +3,6 @@ package com.praca.manager.service;
 import com.praca.manager.repository.CustomerRepository;
 import com.praca.manager.repository.ICustomerService;
 import com.praca.manager.entity.Customer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,8 +12,11 @@ import java.util.List;
 @Transactional
 public class CustomerService implements ICustomerService {
 
-    @Autowired
     private CustomerRepository customerRepository;
+
+    public CustomerService(CustomerRepository customerRepository){
+        this.customerRepository = customerRepository;
+    }
 
     public List<Customer> listAll() {
 
