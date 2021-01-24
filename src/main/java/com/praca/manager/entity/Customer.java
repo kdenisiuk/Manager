@@ -1,8 +1,11 @@
 package com.praca.manager.entity;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.util.List;
 
+@DynamicUpdate
 @Entity
 @Table(name = "customer")
 public class Customer {
@@ -43,7 +46,7 @@ public class Customer {
 
     public void setCustomerId(Integer id){
 
-        this.customerId = customerId;
+        this.customerId = id;
     }
 
     public String getOwner() {

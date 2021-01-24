@@ -15,6 +15,7 @@ public class PdfService {
 
     private CustomerService customerService;
     private DetailsService detailsService;
+
     public PdfService(CustomerService customerService, DetailsService detailsService){
         this.customerService = customerService;
         this.detailsService = detailsService;
@@ -62,7 +63,7 @@ public class PdfService {
         Section subCatPart = catPart.addSection(subPara);
         addEmptyLine(subPara, 2);
 
-        createTable(subCatPart, id);
+        createCustomerTable(subCatPart, id);
 
         document.add(subCatPart);
 
@@ -84,7 +85,7 @@ public class PdfService {
         document.close();
     }
 
-    public void createTable(Section subCatPart, int id)
+    public void createCustomerTable(Section subCatPart, int id)
         throws BadElementException{
 
         PdfPTable table = new PdfPTable(4);
