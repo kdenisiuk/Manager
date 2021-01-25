@@ -11,7 +11,7 @@ email varchar(200)
 );
 
 insert into customer values
-(1, "Krzysztof Denisiuk", "ulica 1", 123456789, "kdenisiuk1993@gmail.com"),
+(1, "Krzysztof Denisiuk", "ulica 1", 123456789, ""),
 (2, "Sebastian Gałecki", "stołowa 18", 123456789, ""),
 (3, "John Smith", "street 40", 444555666, ""),
 (4, "Jan Kowalski", "ulicowa 18", 777888999, ""),
