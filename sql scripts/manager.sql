@@ -37,8 +37,8 @@ foreign key (customer_id) references customer(customer_id)
 );
 
 insert into details values
-(1, 1, true, "2021-01-10", "2021-01-15", "Asus", "x54hr", "0001", "zepsute", "naprawione", "zasilacz", true, "brak", "", "", ""),
-(1, 2, true, "2021-01-15", "2021-01-18", "HP", "ProBook", "G3", "zepsute", "naprawione", "zasilacz", true, "brak", "", "", ""),
-(1, 3, true, "2021-01-15", "2021-01-16", "Lenovo", "G20", "07", "zepsute", "naprawione", "zasilacz", true, "brak", "", "", ""),
-(1, 4, true, "2021-01-15", "2021-01-17", "Dell", "KM", "500", "zepsute", "naprawione", "zasilacz", true, "brak", "", "", ""),
-(2, 5, true, "2021-01-17", "2021-01-19", "Razer", "08", "100", "zepsute", "naprawione", "zasilacz", true, "brak", "", "", "");
+(1, 1, false, "2021-01-10", "2021-01-15", "Asus", "x54hr", "0001", "broken", "fixed", "true", true, "brak", "", "", ""),
+(1, 2, false , "2021-01-15", "2021-01-18", "HP", "ProBook", "G3", "broken", "fixed", "true", true, "brak", "", "", ""),
+(1, 3, false , "2021-01-15", "2021-01-16", "Lenovo", "G20", "07", "broken", "fixed", "true", true, "brak", "", "", ""),
+(1, 4, false , "2021-01-15", "2021-01-17", "Dell", "KM", "500", "broken", "fixed", "true", true, "brak", "", "", ""),
+(2, 5, false , "2021-01-17", "2021-01-19", "Razer", "08", "100", "broken", "fixed", "true", true, "brak", "", "", "");
