@@ -14,8 +14,8 @@ You can:
 -every customer can be edited, selected, deleted, also you can add event(detail)
 -search (all customers appears in a table at main page) for customer by phone number and/or owner (name and surname)
 -after selection of specific customer you can add detail. Details represents events like device repair errand (typical for computer service)
+-generate PDF with customer data with attached choosen event(detail). Select customer -> to PDF. You have to set PDF directory in PdfService, change "lenovo" to your username
 _________________________________________________
 Incoming features:
 -mailing
--PDF generation
 -printing
