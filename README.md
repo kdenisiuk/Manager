@@ -10,7 +10,7 @@ Every customer posses data like phone number, name/surname, adress, email
 each customer can have multiple events, wchich is fully editable
 
 app stores mailng history
-
+____________________________________________________
 You can:
 
 -add customer with unique ID, phone number, address, name and surname(owner), email
