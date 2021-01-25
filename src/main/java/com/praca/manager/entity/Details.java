@@ -182,4 +182,8 @@ public class Details {
 
         this.customer = customer;
     }
+
+    public void setDelivered(boolean delivered) {
+        this.delivered = delivered;
+    }
 }

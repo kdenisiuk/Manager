@@ -150,10 +150,12 @@ public class CustomerController {
         return "find_customer_result";
     }
 
-    @RequestMapping("/print/{id}")
-    public String customerToPdf(@PathVariable(name = "id") Integer id) throws FileNotFoundException, DocumentException {
+    @RequestMapping("/print/{customerId}/{detailId}")
+    public String customerToPdf(@PathVariable(name = "customerId") Integer customerId,
+                                @PathVariable(name = "detailId") Integer detailId)
+                                throws FileNotFoundException, DocumentException {
 
-        pdfService.newDocument(id);
+        pdfService.newDocument(customerId, detailId);
 
         return "redirect:/";
     }

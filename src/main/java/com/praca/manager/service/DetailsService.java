@@ -26,6 +26,11 @@ public class DetailsService implements IDetailsService {
         detailsRepository.deleteById(id);
     }
 
+    public Details getDetails(Integer id){
+
+        return detailsRepository.findById(id).get();
+    }
+
     @Override
     public List<Details> findByCustomerId(int id) {
         var customerDetails = (List<Details>) detailsRepository.findByCustomerId(id);

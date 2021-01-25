@@ -75,6 +75,7 @@
             <td th:text="${details.comments}">Comments</td>
             <td>
                 <a th:href="@{'/deletedetail/' + ${details.id}}">Delete</a>
+                <a th:href="@{/print/{customerId}/{detailId}(customerId = ${customerSelect.getCustomerId()}, detailId = ${details.getId()})}">To PDF </a>
             </td>
         </tr>
         </tbody>
