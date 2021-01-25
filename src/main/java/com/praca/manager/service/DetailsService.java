@@ -12,7 +12,7 @@ import java.util.List;
 @Transactional
 public class DetailsService implements IDetailsService {
 
-    private DetailsRepository detailsRepository;
+    private final DetailsRepository detailsRepository;
 
     public DetailsService(DetailsRepository detailsRepository){
         this.detailsRepository = detailsRepository;

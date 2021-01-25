@@ -1,33 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:remove="all">CodeCouple Newsletter</title>
+    <title>Email</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
     <div>
             <form action="#" th:action="@{/saveMail}" th:object="${mail}" method="post" >
-                <tr>
-                    <td>Email:</td>
-                    <td>
-                        <input type="text" th:field="*{address}" readonly="readonly" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Message Subject:</td>
-                    <td>
+                <label>Email:
+                    <input type="text" th:field="*{address}" readonly="readonly" />
+                </label>
+                <label>Message Subject:
                         <input type="text" th:field="*{subject}"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Message text:</td>
-                    <td>
+                </label>
+                <label>Message text:
                         <input type="text" th:field="*{text}"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2"><button type="submit">Send</button></td>
-                </tr>
+                <input type="submit" value="Send">
+                </label>
             </form>
     </div>
 </body>

@@ -2,9 +2,12 @@ package com.praca.manager.service;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
+import com.praca.manager.entity.Customer;
 import com.praca.manager.entity.Details;
 import org.springframework.stereotype.Service;
 
+import javax.swing.filechooser.FileSystemView;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.Date;
@@ -12,40 +15,46 @@ import java.util.Date;
 @Service
 public class PdfService {
 
-    private CustomerService customerService;
-    private DetailsService detailsService;
+    private final CustomerService customerService;
+    private final DetailsService detailsService;
+    private Customer customer;
+    private Details details;
 
-    public PdfService(CustomerService customerService, DetailsService detailsService){
+    private PdfService(CustomerService customerService, DetailsService detailsService){
         this.customerService = customerService;
         this.detailsService = detailsService;
     }
 
-    private static Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
-    private static Font normalFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
-    private static Font normalBoldFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
+    private static final Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
+    private static final Font normalFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
+    private static final Font normalBoldFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
 
     public void newDocument(int customerId, int detailId) throws DocumentException, FileNotFoundException {
-        Details details = detailsService.getDetails(detailId);
+
+        details = detailsService.getDetails(detailId);
+        customer = customerService.getCustomer(customerId);
+
         details.setDelivered(true);
         detailsService.saveDetails(details);
 
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("C:/Users/Lenovo/Desktop/new.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream(getDir()));
+        System.out.println(getDir());
 
         document.open();
 
         document.add(createTitleParagraph());
 
-        document.add(createCustomerParagraph(customerId));
+        document.add(createCustomerParagraph());
 
-        document.add(createDetailParagraph(detailId));
+        document.add(createDetailParagraph());
 
         document.add(createSignatureParagraph());
 
         document.close();
     }
 
-    public Paragraph createTitleParagraph(){
+    private Paragraph createTitleParagraph(){
 
         Paragraph titleParagraph = new Paragraph();
         titleParagraph.add(new Paragraph("Service Card", titleFont));
@@ -58,49 +67,49 @@ public class PdfService {
         return titleParagraph;
     }
 
-    public Paragraph createCustomerParagraph(int customerId){
+    private Paragraph createCustomerParagraph(){
 
         Paragraph customerDataParagraph = new Paragraph("Customer Data", titleFont);
         addEmptyLine(customerDataParagraph, 1);
 
-        customerDataParagraph.add(createCustomerTable(customerId));
+        customerDataParagraph.add(createCustomerTable());
         addEmptyLine(customerDataParagraph, 1);
 
         return customerDataParagraph;
 
     }
 
-    public Paragraph createDetailParagraph(int detailId){
+    private Paragraph createDetailParagraph(){
         Paragraph detailDataParagraph = new Paragraph("Details Data", titleFont);
         addEmptyLine(detailDataParagraph, 1);
 
-        detailDataParagraph.add(createDetailTable(detailId));
+        detailDataParagraph.add(createDetailTable());
         addEmptyLine(detailDataParagraph, 2);
 
         detailDataParagraph.add(new Paragraph("RECEIVED: \n", normalBoldFont));
-        detailDataParagraph.add(new Paragraph(detailsService.getDetails(detailId).getReceived(), normalFont));
+        detailDataParagraph.add(new Paragraph(details.getReceived(), normalFont));
         addEmptyLine(detailDataParagraph, 1);
 
         detailDataParagraph.add(new Paragraph("FINISHED: \n", normalBoldFont));
-        detailDataParagraph.add(new Paragraph(detailsService.getDetails(detailId).getReturned(),normalFont));
+        detailDataParagraph.add(new Paragraph(details.getReturned(),normalFont));
         addEmptyLine(detailDataParagraph, 2);
 
         detailDataParagraph.add(new Paragraph("SYMPTOMS: \n", normalBoldFont));
-        detailDataParagraph.add(new Paragraph(detailsService.getDetails(detailId).getSymptoms(), normalFont));
+        detailDataParagraph.add(new Paragraph(details.getSymptoms(), normalFont));
         addEmptyLine(detailDataParagraph, 1);
 
         detailDataParagraph.add(new Paragraph("REPAIR DESCRIPTION: \n", normalBoldFont));
-        detailDataParagraph.add(new Paragraph(detailsService.getDetails(detailId).getRepair(), normalFont));
+        detailDataParagraph.add(new Paragraph(details.getRepair(), normalFont));
         addEmptyLine(detailDataParagraph, 1);
 
         detailDataParagraph.add(new Paragraph("COMMENT: \n", normalBoldFont));
-        detailDataParagraph.add(new Paragraph(detailsService.getDetails(detailId).getComments(), normalFont));
+        detailDataParagraph.add(new Paragraph(details.getComments(), normalFont));
         addEmptyLine(detailDataParagraph, 5);
 
         return detailDataParagraph;
     }
 
-    public Paragraph createSignatureParagraph(){
+    private Paragraph createSignatureParagraph(){
 
         Paragraph signatureParagraph = new Paragraph();
         Chunk customerSignature = new Chunk("customer signature");
@@ -116,7 +125,7 @@ public class PdfService {
 
     }
 
-    public PdfPTable createCustomerTable(int customerId){
+    private PdfPTable createCustomerTable(){
 
         PdfPTable table = new PdfPTable(4);
 
@@ -136,26 +145,26 @@ public class PdfService {
         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(c1);
 
-        PdfPCell data = new PdfPCell(new Phrase(String.valueOf(String.valueOf(customerService.getCustomer(customerId).getCustomerId()))));
+        PdfPCell data = new PdfPCell(new Phrase(String.valueOf(customer.getCustomerId())));
         data.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(data);
 
-        data = new PdfPCell(new Phrase(customerService.getCustomer(customerId).getOwner()));
+        data = new PdfPCell(new Phrase(customer.getOwner()));
         data.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(data);
 
-        data = new PdfPCell(new Phrase(customerService.getCustomer(customerId).getAddress()));
+        data = new PdfPCell(new Phrase(customer.getAddress()));
         data.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(data);
 
-        data = new PdfPCell(new Phrase(customerService.getCustomer(customerId).getPhoneNumber()));
+        data = new PdfPCell(new Phrase(customer.getPhoneNumber()));
         data.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(data);
 
         return table;
     }
 
-    public PdfPTable createDetailTable(int detailId){
+    private PdfPTable createDetailTable(){
 
         PdfPTable table = new PdfPTable(5);
 
@@ -179,23 +188,23 @@ public class PdfService {
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(cell);
 
-        cell = new PdfPCell(new Phrase(detailsService.getDetails(detailId).getManufacturer()));
+        cell = new PdfPCell(new Phrase(details.getManufacturer()));
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(cell);
 
-        cell = new PdfPCell(new Phrase(detailsService.getDetails(detailId).getManufacturerPattern()));
+        cell = new PdfPCell(new Phrase(details.getManufacturerPattern()));
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(cell);
 
-        cell = new PdfPCell(new Phrase(detailsService.getDetails(detailId).getPatternNumber()));
+        cell = new PdfPCell(new Phrase(details.getPatternNumber()));
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(cell);
 
-        cell = new PdfPCell(new Phrase(detailsService.getDetails(detailId).getPowerSupply()));
+        cell = new PdfPCell(new Phrase(details.getPowerSupply()));
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(cell);
 
-        if (detailsService.getDetails(detailId).isBattery()){
+        if (details.isBattery()){
             cell = new PdfPCell(new Phrase("yes"));
         }else {
             cell = new PdfPCell(new Phrase("no"));
@@ -206,9 +215,16 @@ public class PdfService {
         return table;
     }
 
-    public void addEmptyLine(Paragraph paragraph, int count){
+    private void addEmptyLine(Paragraph paragraph, int count){
         for (int i=0; i<count; i++){
             paragraph.add(new Paragraph(" "));
         }
+    }
+
+    private String getDir(){
+        FileSystemView fileSystemView = FileSystemView.getFileSystemView();
+        File[] roots = fileSystemView.getRoots();
+        String temp = String.valueOf(fileSystemView.getHomeDirectory()) + "/new.pdf";
+        return temp.replace('\\', '/');
     }
 }

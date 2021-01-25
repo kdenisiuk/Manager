@@ -17,10 +17,10 @@ import java.util.List;
 @Controller
 public class CustomerController {
 
-    private PdfService pdfService;
-    private CustomerService customerService;
-    private DetailsService detailsService;
-    private MailService mailService;
+    private final PdfService pdfService;
+    private final CustomerService customerService;
+    private final DetailsService detailsService;
+    private final MailService mailService;
 
     public CustomerController(DetailsService detailsService,
                               CustomerService customerService,
@@ -52,7 +52,7 @@ public class CustomerController {
         return "new_customer";
     }
 
-    @RequestMapping("/newdetail/{id}")
+    @RequestMapping("/newDetail/{id}")
     public String showNewDetailPage(@PathVariable(name = "id") Integer id,
                                     Model model){
 
@@ -109,7 +109,7 @@ public class CustomerController {
 
 
 
-    @RequestMapping("/deletedetail/{id}")
+    @RequestMapping("/deleteDetail/{id}")
     public String deleteDetail(@PathVariable(name = "id") Integer id){
 
         detailsService.deleteDetails(id);
@@ -174,9 +174,8 @@ public class CustomerController {
         mail.setAddress(customerService.getCustomer(customerId).getEmail());
         model.addAttribute("id", customerId);
         model.addAttribute(mail);
-        ModelAndView modelAndView = new ModelAndView("email");
 
-        return modelAndView;
+        return new ModelAndView("email");
     }
 
     @RequestMapping(value = "/saveMail", method = RequestMethod.POST)

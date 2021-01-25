@@ -186,4 +186,26 @@ public class Details {
     public void setDelivered(boolean delivered) {
         this.delivered = delivered;
     }
+
+    @Override
+    public String toString() {
+        return "Details{" +
+                "id=" + id +
+                ", delivered=" + delivered +
+                ", received='" + received + '\'' +
+                ", returned='" + returned + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", manufacturerPattern='" + manufacturerPattern + '\'' +
+                ", patternNumber='" + patternNumber + '\'' +
+                ", symptoms='" + symptoms + '\'' +
+                ", repair='" + repair + '\'' +
+                ", powerSupply='" + powerSupply + '\'' +
+                ", battery=" + battery +
+                ", comments='" + comments + '\'' +
+                ", documentInternal='" + documentInternal + '\'' +
+                ", documentExternal='" + documentExternal + '\'' +
+                ", documentWarranty='" + documentWarranty + '\'' +
+                ", customer=" + customer +
+                '}';
+    }
 }
