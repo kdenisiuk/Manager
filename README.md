@@ -9,6 +9,8 @@ Every customer posses data like phone number, name/surname, adress, email
 
 each customer can have multiple events, wchich is fully editable
 
+app stores mailng history
+
 You can:
 
 -add customer with unique ID, phone number, address, name and surname(owner), email
@@ -19,9 +21,9 @@ You can:
 
 -after selection of specific customer you can add detail. Details represents events like device repair errand (typical for computer service)
 
--you can generate PDF with customer and specified event data (serice card). select customer -> to PDF
+-generate PDF with customer and specified event data (serice card). select customer -> to PDF
 
--you can send email to the customer with customizable subject and text
+-send email to the customer with customizable subject and text
 _________________________________________________
 TODO
 
