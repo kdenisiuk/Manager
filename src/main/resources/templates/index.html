@@ -9,7 +9,7 @@
 <div align="center">
     <h1>Customer List</h1>
     <a href="/new">Create New Customer</a>
-    <a href="/find">Find Exsisiting Customer</a>
+    <a href="/find">Find Existing Customer</a>
     <br/><br/>
     <table border="1" cellpadding="10">
         <thead>
@@ -18,6 +18,7 @@
             <th>Owner</th>
             <th>Address</th>
             <th>Phone Number</th>
+            <th>Email</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -27,11 +28,13 @@
             <td th:text="${customer.owner}">First Name</td>
             <td th:text="${customer.address}">Address</td>
             <td th:text="${customer.phoneNumber}">Phone Number</td>
+            <td th:text="${customer.email}">Email address </td>
             <td>
                 <a class="edit" th:href="@{'/edit/' + ${customer.customerId}}">Edit</a>
                 <a class="delete" th:href="@{'/delete/' + ${customer.customerId}}">Delete</a>
                 <a class="select" th:href="@{'/select/' + ${customer.customerId}}">Select</a>
                 <a class="new" th:href="@{'/newdetail/' + ${customer.customerId}}">New Detail</a>
+                <a class="email" th:href="@{'/email/' + ${customer.customerId}}">Email</a>
             </td>
         </tr>
         </tbody>

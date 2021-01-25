@@ -3,13 +3,14 @@ package com.praca.manager.controller;
 import com.itextpdf.text.DocumentException;
 import com.praca.manager.entity.Customer;
 import com.praca.manager.entity.Details;
-import com.praca.manager.service.CustomerService;
-import com.praca.manager.service.DetailsService;
-import com.praca.manager.service.PdfService;
+import com.praca.manager.entity.Mail;
+import com.praca.manager.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.mail.MessagingException;
 import java.io.FileNotFoundException;
 import java.util.List;
 
@@ -19,13 +20,16 @@ public class CustomerController {
     private PdfService pdfService;
     private CustomerService customerService;
     private DetailsService detailsService;
+    private MailService mailService;
 
     public CustomerController(DetailsService detailsService,
                               CustomerService customerService,
-                              PdfService pdfService){
+                              PdfService pdfService,
+                              MailService mailService){
         this.detailsService = detailsService;
         this.customerService = customerService;
         this.pdfService = pdfService;
+        this.mailService = mailService;
     }
 
     @RequestMapping("/")
@@ -49,7 +53,8 @@ public class CustomerController {
     }
 
     @RequestMapping("/newdetail/{id}")
-    public String showNewDetailPage(Model model, @PathVariable(name = "id") Integer id){
+    public String showNewDetailPage(@PathVariable(name = "id") Integer id,
+                                    Model model){
 
         Details details = new Details();
 
@@ -91,7 +96,8 @@ public class CustomerController {
     }
 
     @RequestMapping("/edit/{id}")
-    public ModelAndView showEditProductPage(@PathVariable(name = "id") Integer id, Model model) {
+    public ModelAndView showEditProductPage(@PathVariable(name = "id") Integer id,
+                                            Model model) {
 
         ModelAndView modelAndView = new ModelAndView("edit_customer");
         Customer customer = customerService.getCustomer(id);
@@ -156,6 +162,29 @@ public class CustomerController {
                                 throws FileNotFoundException, DocumentException {
 
         pdfService.newDocument(customerId, detailId);
+
+        return "redirect:/";
+    }
+
+    @RequestMapping("/email/{customerId}")
+    public ModelAndView writeEmail(@PathVariable(name = "customerId") Integer customerId,
+                            Model model) {
+
+        Mail mail = new Mail();
+        mail.setAddress(customerService.getCustomer(customerId).getEmail());
+        model.addAttribute("id", customerId);
+        model.addAttribute(mail);
+        ModelAndView modelAndView = new ModelAndView("email");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/saveMail", method = RequestMethod.POST)
+    public String saveMail(@ModelAttribute Mail mail)
+            throws MessagingException {
+
+        mailService.saveMail(mail);
+        mailService.sendMail(mail.getAddress(), mail.getSubject(), mail.getText());
 
         return "redirect:/";
     }

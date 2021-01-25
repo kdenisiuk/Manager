@@ -1,7 +1,6 @@
 package com.praca.manager.entity;
 
 import org.hibernate.annotations.DynamicUpdate;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -23,6 +22,9 @@ public class Customer {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column(name = "email")
+    private String eMail;
+
     @OneToMany(mappedBy = "customer")
     List<Details> details;
 
@@ -32,11 +34,13 @@ public class Customer {
     public Customer(Integer customerId,
                     String owner,
                     String address,
-                    String phoneNumber){
+                    String phoneNumber,
+                    String eMail){
                         this.customerId = customerId;
                         this.owner = owner;
                         this.address = address;
                         this.phoneNumber = phoneNumber;
+                        this.eMail = eMail;
     }
 
     public Integer getCustomerId() {
@@ -79,6 +83,15 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getEmail() {
+        return eMail;
+    }
+
+    public void setEmail(String eMail) {
+
+        this.eMail = eMail;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -86,6 +99,7 @@ public class Customer {
                 ", firstName='" + owner + '\'' +
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + eMail + '\'' +
                 '}';
     }
 }
