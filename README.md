@@ -25,6 +25,7 @@ You can:
 
 -send email to the customer with customizable subject and text
 _________________________________________________
-TODO
+Incoming features:
 
--refactor and reformat
+-support for bank transfers (PayU)
+
